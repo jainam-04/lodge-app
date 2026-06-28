@@ -1,0 +1,6 @@
+README.md
+.env
+.env.example
+node_modules
+package-lock.json
+credentials.json
