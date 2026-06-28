@@ -6,6 +6,7 @@ const Tesseract = require("tesseract.js");
 const sharp = require("sharp");
 const path = require("path");
 const fs = require("fs");
+require('dotenv').config();
 
 const app = express();
 app.use(cors());
