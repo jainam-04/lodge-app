@@ -8,10 +8,6 @@
     />
     <meta name="theme-color" content="#1a56db" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
     <title>Lodge Manager</title>
     <link rel="manifest" href="manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,10 +15,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- html5-qrcode for QR scanning -->
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
     <style>
-      /* ── Tokens ── */
       :root {
         --blue: #1a56db;
         --blue-dark: #1340aa;
@@ -43,8 +37,6 @@
         --radius-sm: 8px;
         --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
       }
-
-      /* ── Reset ── */
       *,
       *::before,
       *::after {
@@ -66,8 +58,6 @@
         font-size: 15px;
         -webkit-font-smoothing: antialiased;
       }
-
-      /* ── Layout ── */
       #app {
         max-width: 480px;
         margin: 0 auto;
@@ -76,7 +66,7 @@
         flex-direction: column;
       }
 
-      /* ── Header ── */
+      /* Header */
       .header {
         background: var(--blue);
         color: #fff;
@@ -88,19 +78,6 @@
         top: 0;
         z-index: 100;
       }
-      .header-back {
-        width: 32px;
-        height: 32px;
-        background: rgba(255, 255, 255, 0.2);
-        border: none;
-        border-radius: 50%;
-        color: #fff;
-        font-size: 18px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
       .header-title {
         font-size: 17px;
         font-weight: 600;
@@ -110,7 +87,7 @@
         font-size: 22px;
       }
 
-      /* ── Bottom Nav ── */
+      /* Bottom Nav */
       .bottom-nav {
         position: fixed;
         bottom: 0;
@@ -146,7 +123,7 @@
         font-size: 22px;
       }
 
-      /* ── Pages ── */
+      /* Pages */
       .page {
         display: none;
         flex: 1;
@@ -157,7 +134,7 @@
         display: block;
       }
 
-      /* ── Home Page ── */
+      /* Home */
       .home-banner {
         background: linear-gradient(
           135deg,
@@ -182,7 +159,6 @@
         opacity: 0.65;
         margin-top: 6px;
       }
-
       .stat-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -213,7 +189,6 @@
         color: var(--ink-3);
         margin-top: 2px;
       }
-
       .quick-action {
         margin: 16px 16px 0;
         background: var(--blue);
@@ -230,15 +205,11 @@
         justify-content: center;
         gap: 10px;
         box-shadow: 0 4px 16px rgba(26, 86, 219, 0.35);
-        transition:
-          transform 0.1s,
-          box-shadow 0.1s;
+        transition: transform 0.1s;
       }
       .quick-action:active {
         transform: scale(0.98);
-        box-shadow: 0 2px 8px rgba(26, 86, 219, 0.25);
       }
-
       .section-title {
         font-size: 13px;
         font-weight: 600;
@@ -247,7 +218,6 @@
         letter-spacing: 0.5px;
         padding: 20px 16px 8px;
       }
-
       .recent-list {
         padding: 0 16px;
         display: flex;
@@ -306,14 +276,13 @@
         color: var(--orange);
       }
 
-      /* ── Check-in Form ── */
+      /* Form */
       .form-body {
         padding: 16px;
         display: flex;
         flex-direction: column;
         gap: 16px;
       }
-
       .scan-card {
         background: var(--card);
         border-radius: var(--radius);
@@ -329,7 +298,7 @@
         align-items: center;
         gap: 6px;
       }
-      .scan-card-title .badge-num {
+      .badge-num {
         width: 22px;
         height: 22px;
         border-radius: 50%;
@@ -340,7 +309,6 @@
         align-items: center;
         justify-content: center;
       }
-
       .scan-buttons {
         display: flex;
         gap: 8px;
@@ -374,7 +342,7 @@
         font-size: 22px;
       }
 
-      /* QR Reader container */
+      /* QR overlay */
       #qr-reader-container {
         display: none;
         position: fixed;
@@ -415,32 +383,10 @@
         font-weight: 500;
       }
 
-      /* OCR image input */
-      .ocr-input-wrap {
-        margin-top: 10px;
-      }
+      /* OCR */
       input[type="file"].ocr-file {
         display: none;
       }
-      .ocr-label {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 14px;
-        border: 2px dashed var(--border);
-        border-radius: var(--radius-sm);
-        cursor: pointer;
-        color: var(--ink-3);
-        font-size: 13px;
-        transition: border-color 0.15s;
-      }
-      .ocr-label:active {
-        border-color: var(--blue);
-      }
-      .ocr-label .icon {
-        font-size: 20px;
-      }
-
       .ocr-loading {
         display: none;
         align-items: center;
@@ -450,6 +396,7 @@
         border-radius: var(--radius-sm);
         color: var(--blue);
         font-size: 13px;
+        margin-top: 10px;
       }
       .ocr-loading.show {
         display: flex;
@@ -461,6 +408,7 @@
         border-top-color: transparent;
         border-radius: 50%;
         animation: spin 0.7s linear infinite;
+        flex-shrink: 0;
       }
       @keyframes spin {
         to {
@@ -468,7 +416,7 @@
         }
       }
 
-      /* Form fields */
+      /* Fields */
       .field-group {
         display: flex;
         flex-direction: column;
@@ -509,24 +457,18 @@
         resize: none;
         min-height: 72px;
       }
-
       .field-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
       }
 
-      /* Members section */
+      /* Members */
       .members-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 12px;
-      }
-      .members-title {
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--ink-2);
       }
       .btn-add-member {
         display: flex;
@@ -541,7 +483,6 @@
         font-weight: 600;
         cursor: pointer;
       }
-
       .member-item {
         border: 1.5px solid var(--border);
         border-radius: var(--radius-sm);
@@ -573,7 +514,7 @@
         gap: 10px;
       }
 
-      /* Payment section */
+      /* Payment */
       .payment-type-row {
         display: flex;
         gap: 8px;
@@ -606,7 +547,6 @@
         background: var(--orange-light);
         color: var(--orange);
       }
-
       .payment-fields {
         display: none;
         margin-top: 10px;
@@ -616,7 +556,6 @@
         flex-direction: column;
         gap: 10px;
       }
-
       .amount-total {
         background: var(--surface);
         border-radius: var(--radius-sm);
@@ -667,7 +606,7 @@
         transform: none;
       }
 
-      /* ── Toast ── */
+      /* Toast */
       .toast {
         position: fixed;
         bottom: 90px;
@@ -699,7 +638,7 @@
         background: var(--red);
       }
 
-      /* ── Records Page ── */
+      /* Records */
       .records-header {
         padding: 16px;
       }
@@ -732,7 +671,6 @@
         gap: 5px;
         white-space: nowrap;
       }
-
       .records-list {
         padding: 0 16px;
         display: flex;
@@ -778,7 +716,6 @@
         font-size: 16px;
         color: var(--ink);
       }
-
       .empty-state {
         text-align: center;
         padding: 60px 20px;
@@ -796,13 +733,6 @@
         font-size: 13px;
         margin-top: 4px;
       }
-
-      /* ── Utility ── */
-      .divider {
-        height: 1px;
-        background: var(--border);
-        margin: 4px 0;
-      }
       .card {
         background: var(--card);
         border-radius: var(--radius);
@@ -813,22 +743,18 @@
   </head>
   <body>
     <div id="app">
-      <!-- ── Header ── -->
       <div class="header" id="main-header">
         <span class="header-icon">🏨</span>
         <span class="header-title">Lodge Manager</span>
       </div>
 
-      <!-- ── Pages ── -->
-
-      <!-- HOME -->
+      <!-- HOME PAGE -->
       <div class="page active" id="page-home">
         <div class="home-banner">
           <h1>Good day! 👋</h1>
           <p>Manage check-ins, scan Aadhaar, track payments</p>
           <div class="home-date" id="home-date"></div>
         </div>
-
         <div class="stat-row">
           <div class="stat-card">
             <div class="stat-label">Today's Check-ins</div>
@@ -841,11 +767,9 @@
             <div class="stat-sub">total records</div>
           </div>
         </div>
-
-        <button class="quick-action" onclick="goToCheckin()">
-          ➕ New Guest Check-in
-        </button>
-
+        <button class="quick-action" onclick="switchPage('checkin')"
+          >➕ New Guest Check-in</button
+        >
         <div class="section-title">Recent Check-ins</div>
         <div class="recent-list" id="recent-list">
           <div class="empty-state">
@@ -856,10 +780,9 @@
         </div>
       </div>
 
-      <!-- CHECK-IN FORM -->
+      <!-- CHECK-IN PAGE -->
       <div class="page" id="page-checkin">
         <div class="form-body">
-          <!-- Room -->
           <div class="card">
             <div class="field">
               <label>Room Number *</label>
@@ -867,34 +790,30 @@
             </div>
           </div>
 
-          <!-- Guest Aadhaar Scan -->
+          <!-- Guest scan -->
           <div class="scan-card">
             <div class="scan-card-title">
               <span class="badge-num">1</span> Guest Aadhaar Card
             </div>
             <div class="scan-buttons">
               <button class="btn-scan-qr" onclick="openQRScanner('guest')">
-                <span class="icon">📷</span>
-                Scan QR Code
+                <span class="icon">📷</span>Scan QR Code
               </button>
               <button class="btn-scan-ocr" onclick="triggerOCR('guest')">
-                <span class="icon">🔍</span>
-                Scan Card (OCR)
+                <span class="icon">🔍</span>Scan Card (OCR)
               </button>
             </div>
+            <!-- FIX: no onchange inline — handled via addEventListener in JS -->
             <input
               type="file"
               id="ocr-file-guest"
               class="ocr-file"
               accept="image/*"
               capture="environment"
-              onchange="handleOCR(event, 'guest')"
             />
             <div class="ocr-loading" id="ocr-loading-guest">
-              <div class="spinner"></div>
-              Reading card... please wait
+              <div class="spinner"></div> Reading card... please wait
             </div>
-
             <div class="field-group" style="margin-top: 14px">
               <div class="field">
                 <label>Full Name *</label>
@@ -923,9 +842,9 @@
                 <label>Gender</label>
                 <select id="guest-gender">
                   <option value="">Select</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                  <option>Other</option>
+                  <option>Male</option
+                  ><option>Female</option
+                  ><option>Other</option>
                 </select>
               </div>
               <div class="field">
@@ -941,12 +860,12 @@
           <!-- Members -->
           <div class="scan-card">
             <div class="members-header">
-              <div class="scan-card-title" style="margin-bottom: 0">
-                👥 Additional Members
-              </div>
-              <button class="btn-add-member" onclick="addMember()">
-                ＋ Add
-              </button>
+              <div class="scan-card-title" style="margin-bottom: 0"
+                >👥 Additional Members</div
+              >
+              <button class="btn-add-member" onclick="addMember()"
+                >＋ Add</button
+              >
             </div>
             <div id="members-list"></div>
             <div
@@ -958,13 +877,13 @@
                 padding: 8px 0;
               "
             >
-              No additional members. Tap Add if guest has family/companions.
+              No additional members. Tap Add if guest has companions.
             </div>
           </div>
 
           <!-- Payment -->
           <div class="scan-card">
-            <div class="scan-card-title"> 💳 Payment Details </div>
+            <div class="scan-card-title">💳 Payment Details</div>
             <div class="payment-type-row">
               <div
                 class="payment-chip"
@@ -982,80 +901,69 @@
                 class="payment-chip"
                 id="chip-half"
                 onclick="selectPayment('half')"
-                >⚡ Half & Half</div
+                >⚡ Half &amp; Half</div
               >
             </div>
-
             <div class="payment-fields" id="fields-cash">
-              <div class="field">
-                <label>Cash Amount (₹)</label>
-                <input
+              <div class="field"
+                ><label>Cash Amount (₹)</label
+                ><input
                   type="number"
                   id="cash-amount"
                   placeholder="0"
                   oninput="updateTotal()"
-                />
-              </div>
+              /></div>
             </div>
-
             <div class="payment-fields" id="fields-online">
-              <div class="field">
-                <label>Online Amount (₹)</label>
-                <input
+              <div class="field"
+                ><label>Online Amount (₹)</label
+                ><input
                   type="number"
                   id="online-amount"
                   placeholder="0"
                   oninput="updateTotal()"
-                />
-              </div>
-              <div class="field">
-                <label>UPI / Reference No.</label>
-                <input
+              /></div>
+              <div class="field"
+                ><label>UPI / Reference No.</label
+                ><input
                   type="text"
                   id="upi-ref"
                   placeholder="UPI transaction ID"
-                />
-              </div>
+              /></div>
             </div>
-
             <div class="payment-fields" id="fields-half">
               <div class="field-row">
-                <div class="field">
-                  <label>Cash (₹)</label>
-                  <input
+                <div class="field"
+                  ><label>Cash (₹)</label
+                  ><input
                     type="number"
                     id="cash-amount-half"
                     placeholder="0"
                     oninput="updateTotal()"
-                  />
-                </div>
-                <div class="field">
-                  <label>Online (₹)</label>
-                  <input
+                /></div>
+                <div class="field"
+                  ><label>Online (₹)</label
+                  ><input
                     type="number"
                     id="online-amount-half"
                     placeholder="0"
                     oninput="updateTotal()"
-                  />
-                </div>
+                /></div>
               </div>
-              <div class="field">
-                <label>UPI / Reference No.</label>
-                <input
+              <div class="field"
+                ><label>UPI / Reference No.</label
+                ><input
                   type="text"
                   id="upi-ref-half"
                   placeholder="UPI transaction ID"
-                />
-              </div>
+              /></div>
             </div>
-
             <div class="amount-total">
               <span class="amount-total-label">Total Collected</span>
               <span class="amount-total-value" id="total-display">₹ 0</span>
             </div>
           </div>
 
-          <!-- Remarks -->
           <div class="card">
             <div class="field">
               <label>Remarks (optional)</label>
@@ -1066,22 +974,22 @@
             </div>
           </div>
 
-          <button class="btn-submit" id="submit-btn" onclick="submitCheckin()">
-            ✅ Save Check-in to Sheet
-          </button>
+          <button class="btn-submit" id="submit-btn" onclick="submitCheckin()"
+            >✅ Save Check-in to Sheet</button
+          >
         </div>
       </div>
 
-      <!-- RECORDS -->
+      <!-- RECORDS PAGE -->
       <div class="page" id="page-records">
         <div class="records-header">
           <div class="records-filter">
-            <select id="month-select" onchange="loadRecords()">
-              <option>Loading...</option>
-            </select>
-            <button class="btn-download" onclick="downloadCSV()">
-              ⬇️ Download
-            </button>
+            <select id="month-select" onchange="loadRecords()"
+              ><option>Loading...</option></select
+            >
+            <button class="btn-download" onclick="downloadCSV()"
+              >⬇️ Download</button
+            >
           </div>
         </div>
         <div class="records-list" id="records-list">
@@ -1093,7 +1001,7 @@
         </div>
       </div>
 
-      <!-- BOTTOM NAV -->
+      <!-- NAV -->
       <nav class="bottom-nav">
         <button
           class="nav-btn active"
@@ -1119,31 +1027,28 @@
       </nav>
     </div>
 
-    <!-- QR Scanner Overlay -->
+    <!-- QR Overlay -->
     <div id="qr-reader-container">
       <button class="qr-close-btn" onclick="closeQRScanner()">✕</button>
-      <div class="qr-label" id="qr-label"
-        >Point camera at the QR code on Aadhaar card</div
-      >
+      <div class="qr-label">Point camera at the QR code on Aadhaar card</div>
       <div id="qr-reader"></div>
     </div>
 
-    <!-- Toast -->
     <div class="toast" id="toast"></div>
 
     <script>
-      // ── Config ──────────────────────────────────────────────────────────────────
-      const API_BASE = "http://localhost:3001"; // Change to your deployed backend URL
+      // ── Config — change this to your backend URL ──────────────────────────────────
+      const API_BASE = "http://localhost:3001";
 
-      // ── State ────────────────────────────────────────────────────────────────────
+      // ── State ─────────────────────────────────────────────────────────────────────
       let currentPayment = null;
       let memberCount = 0;
       let html5QrCode = null;
-      let currentQRTarget = null; // 'guest' or member index
+      let currentQRTarget = null;
       let recentCheckins = [];
       let allRecords = [];
 
-      // ── Page Switching ────────────────────────────────────────────────────────────
+      // ── Page switching ─────────────────────────────────────────────────────────────
       function switchPage(name) {
         document
           .querySelectorAll(".page")
@@ -1153,39 +1058,21 @@
           .forEach((b) => b.classList.remove("active"));
         document.getElementById("page-" + name).classList.add("active");
         document.getElementById("nav-" + name).classList.add("active");
-
         const titles = {
           home: "🏨 Lodge Manager",
           checkin: "New Check-in",
           records: "Records",
         };
         document.querySelector(".header-title").textContent = titles[name];
-
         if (name === "records") loadMonths();
         if (name === "home") loadHomeStats();
       }
 
-      function goToCheckin() {
-        switchPage("checkin");
-      }
-
-      // ── Date display ──────────────────────────────────────────────────────────────
-      function setHomeDate() {
-        const now = new Date();
-        document.getElementById("home-date").textContent =
-          now.toLocaleDateString("en-IN", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          });
-      }
-
       // ── Toast ─────────────────────────────────────────────────────────────────────
-      function showToast(msg, type = "") {
+      function showToast(msg, type) {
         const t = document.getElementById("toast");
         t.textContent = msg;
-        t.className = "toast show " + type;
+        t.className = "toast show" + (type ? " " + type : "");
         setTimeout(() => t.classList.remove("show"), 3000);
       }
 
@@ -1198,68 +1085,55 @@
           .start(
             {facingMode: "environment"},
             {fps: 10, qrbox: {width: 280, height: 280}},
-            onQRSuccess,
-            () => {},
+            function (decodedText) {
+              closeQRScanner();
+              const parsed = parseAadhaarQR(decodedText);
+              if (parsed) {
+                fillAadhaarFields(currentQRTarget, parsed);
+                showToast("Aadhaar scanned successfully!", "success");
+              } else {
+                showToast(
+                  "QR read but format not recognised. Try OCR.",
+                  "error",
+                );
+              }
+            },
+            function () {}, // ignore frame errors
           )
-          .catch((err) => {
+          .catch(function () {
             showToast("Camera access denied. Use OCR instead.", "error");
             closeQRScanner();
           });
       }
 
       function closeQRScanner() {
+        document.getElementById("qr-reader-container").classList.remove("open");
         if (html5QrCode) {
           html5QrCode
             .stop()
-            .then(() => {
+            .catch(function () {})
+            .finally(function () {
               html5QrCode = null;
-              document
-                .getElementById("qr-reader-container")
-                .classList.remove("open");
-            })
-            .catch(() => {
-              document
-                .getElementById("qr-reader-container")
-                .classList.remove("open");
             });
-        } else {
-          document
-            .getElementById("qr-reader-container")
-            .classList.remove("open");
         }
       }
 
-      function onQRSuccess(decodedText) {
-        closeQRScanner();
-        // Aadhaar QR returns XML or delimited data
-        const parsed = parseAadhaarQR(decodedText);
-        if (parsed) {
-          fillAadhaarFields(currentQRTarget, parsed);
-          showToast("✅ Aadhaar scanned successfully!", "success");
-        } else {
-          showToast("QR read but format not recognised. Try OCR.", "error");
-        }
-      }
-
-      // Parse Aadhaar QR — supports XML format (post-2018) and pipe-delimited (older)
       function parseAadhaarQR(text) {
         try {
-          // XML format
-          if (text.includes("<") && text.includes("uid=")) {
+          if (
+            text.includes("uid=") ||
+            text.includes("<PrintLetterBarcodeData")
+          ) {
             const parser = new DOMParser();
             const xml = parser.parseFromString(text, "text/xml");
             const pi =
               xml.querySelector("PrintLetterBarcodeData") ||
               xml.documentElement;
+            const g = pi.getAttribute("gender");
             return {
               name: pi.getAttribute("name") || "",
               dob: pi.getAttribute("dob") || "",
-              gender:
-                pi.getAttribute("gender") === "M"
-                  ? "Male"
-                  : pi.getAttribute("gender") === "F"
-                    ? "Female"
-                    : "",
+              gender: g === "M" ? "Male" : g === "F" ? "Female" : "",
               aadhaarNo: pi.getAttribute("uid") || "",
               address: [
                 pi.getAttribute("house"),
@@ -1275,46 +1149,49 @@
                 .join(", "),
             };
           }
-          // Older pipe-delimited: Name|Gender|DOB|Address
           const parts = text.split("|");
           if (parts.length >= 4) {
             return {
               name: parts[0] || "",
               gender:
-                parts[1] === "1"
-                  ? "Male"
-                  : parts[1] === "2"
-                    ? "Female"
-                    : parts[1] || "",
+                parts[1] === "1" ? "Male" : parts[1] === "2" ? "Female" : "",
               dob: parts[2] || "",
               aadhaarNo: "",
               address: parts.slice(3).join(", "),
             };
           }
           return null;
-        } catch {
+        } catch (e) {
           return null;
         }
       }
 
       // ── OCR ───────────────────────────────────────────────────────────────────────
+      // FIX: use addEventListener instead of inline onchange — prevents double-fire
+      function setupOCRInput(id, target) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        // Remove any old listeners by cloning
+        const fresh = el.cloneNode(true);
+        el.parentNode.replaceChild(fresh, el);
+        document.getElementById(id).addEventListener("change", function (e) {
+          handleOCR(e, target);
+        });
+      }
+
       function triggerOCR(target) {
-        document.getElementById("ocr-file-" + target)?.click() ||
-          document.querySelector(`.ocr-file[data-target="${target}"]`)?.click();
-        // For members, use dynamic ID
-        const el = document.getElementById("ocr-file-" + target);
+        // FIX: single click only
+        var fileId = "ocr-file-" + target;
+        var el = document.getElementById(fileId);
         if (el) el.click();
       }
 
       async function handleOCR(event, target) {
         const file = event.target.files[0];
         if (!file) return;
-        const loadingId =
-          target === "guest" ? "ocr-loading-guest" : "ocr-loading-" + target;
-        const loadingEl = document.getElementById(loadingId);
-        if (loadingEl) {
-          loadingEl.classList.add("show");
-        }
+
+        const loadingEl = document.getElementById("ocr-loading-" + target);
+        if (loadingEl) loadingEl.classList.add("show");
 
         try {
           const formData = new FormData();
@@ -1326,17 +1203,18 @@
           const data = await res.json();
           if (data.success && data.parsed) {
             fillAadhaarFields(target, data.parsed);
-            showToast("✅ Card read! Please verify the details.", "success");
+            showToast("Card read! Please verify the details.", "success");
           } else {
             showToast(
               "Could not read card clearly. Please fill manually.",
               "error",
             );
           }
-        } catch {
-          showToast("Server error during OCR. Fill manually.", "error");
+        } catch (e) {
+          showToast("Server error. Fill manually.", "error");
         } finally {
           if (loadingEl) loadingEl.classList.remove("show");
+          // FIX: reset value so same file can be picked again if needed
           event.target.value = "";
         }
       }
@@ -1349,26 +1227,25 @@
           if (data.gender)
             document.getElementById("guest-gender").value = data.gender;
           if (data.aadhaarNo)
-            document.getElementById("guest-aadhaar").value = formatAadhaar(
+            document.getElementById("guest-aadhaar").value = fmtAadhaar(
               data.aadhaarNo,
             );
           if (data.address)
             document.getElementById("guest-address").value = data.address;
         } else {
-          // Member — target is like "member-0"
-          const idx = target.split("-")[1];
-          const el = (n) => document.getElementById("member-" + idx + "-" + n);
-          if (el("name") && data.name) el("name").value = data.name;
-          if (el("aadhaar") && data.aadhaarNo)
-            el("aadhaar").value = formatAadhaar(data.aadhaarNo);
+          const idx = target.replace("member-", "");
+          const n = document.getElementById("member-" + idx + "-name");
+          const a = document.getElementById("member-" + idx + "-aadhaar");
+          if (n && data.name) n.value = data.name;
+          if (a && data.aadhaarNo) a.value = fmtAadhaar(data.aadhaarNo);
         }
       }
 
-      function formatAadhaar(no) {
-        const clean = no.replace(/\D/g, "").slice(0, 12);
-        return clean.replace(/(\d{4})(\d{0,4})(\d{0,4})/, (_, a, b, c) =>
-          [a, b, c].filter(Boolean).join(" "),
-        );
+      function fmtAadhaar(no) {
+        const c = no.replace(/\D/g, "").slice(0, 12);
+        return c.replace(/(\d{4})(\d{0,4})(\d{0,4})/, function (_, a, b, cc) {
+          return [a, b, cc].filter(Boolean).join(" ");
+        });
       }
 
       // ── Members ───────────────────────────────────────────────────────────────────
@@ -1379,63 +1256,65 @@
         }
         const idx = memberCount++;
         document.getElementById("no-members-msg").style.display = "none";
-
         const div = document.createElement("div");
         div.className = "member-item";
         div.id = "member-block-" + idx;
-        div.innerHTML = `
-    <div class="member-item-header">
-      👤 Member ${idx + 2}
-      <button class="btn-remove-member" onclick="removeMember(${idx})">✕</button>
-    </div>
-    <div class="member-item-body">
-      <div class="scan-buttons">
-        <button class="btn-scan-qr" onclick="openQRScanner('member-${idx}')">
-          <span class="icon">📷</span> Scan QR
-        </button>
-        <button class="btn-scan-ocr" onclick="document.getElementById('ocr-file-member-${idx}').click()">
-          <span class="icon">🔍</span> Scan OCR
-        </button>
-      </div>
-      <input type="file" id="ocr-file-member-${idx}" class="ocr-file" accept="image/*" capture="environment"
-        onchange="handleOCR(event,'member-${idx}')" />
-      <div class="ocr-loading" id="ocr-loading-member-${idx}">
-        <div class="spinner"></div> Reading card...
-      </div>
-      <div class="field">
-        <label>Full Name</label>
-        <input type="text" id="member-${idx}-name" placeholder="Member name" />
-      </div>
-      <div class="field">
-        <label>Aadhaar No</label>
-        <input type="text" id="member-${idx}-aadhaar" placeholder="XXXX XXXX XXXX" maxlength="14" />
-      </div>
-    </div>
-  `;
+        div.innerHTML =
+          '<div class="member-item-header">' +
+          "👤 Member " +
+          (idx + 2) +
+          '<button class="btn-remove-member" onclick="removeMember(' +
+          idx +
+          ')">✕</button>' +
+          "</div>" +
+          '<div class="member-item-body">' +
+          '<div class="scan-buttons">' +
+          '<button class="btn-scan-qr" onclick="openQRScanner(\'member-' +
+          idx +
+          '\')"><span class="icon">📷</span> Scan QR</button>' +
+          '<button class="btn-scan-ocr" onclick="triggerOCR(\'member-' +
+          idx +
+          '\')"><span class="icon">🔍</span> Scan OCR</button>' +
+          "</div>" +
+          '<input type="file" id="ocr-file-member-' +
+          idx +
+          '" class="ocr-file" accept="image/*" capture="environment" />' +
+          '<div class="ocr-loading" id="ocr-loading-member-' +
+          idx +
+          '"><div class="spinner"></div> Reading card...</div>' +
+          '<div class="field"><label>Full Name</label><input type="text" id="member-' +
+          idx +
+          '-name" placeholder="Member name" /></div>' +
+          '<div class="field"><label>Aadhaar No</label><input type="text" id="member-' +
+          idx +
+          '-aadhaar" placeholder="XXXX XXXX XXXX" maxlength="14" /></div>' +
+          "</div>";
         document.getElementById("members-list").appendChild(div);
+        // FIX: set up OCR listener after element is in DOM
+        setupOCRInput("ocr-file-member-" + idx, "member-" + idx);
       }
 
       function removeMember(idx) {
-        document.getElementById("member-block-" + idx)?.remove();
+        document.getElementById("member-block-" + idx).remove();
         memberCount = document.querySelectorAll(".member-item").length;
-        if (memberCount === 0)
+        if (!memberCount)
           document.getElementById("no-members-msg").style.display = "";
       }
 
       function collectMembers() {
         const members = [];
-        document.querySelectorAll(".member-item").forEach((block) => {
-          const idx = block.id.split("-")[2];
-          const name = document
-            .getElementById("member-" + idx + "-name")
-            ?.value?.trim();
-          const aadhaar = document
-            .getElementById("member-" + idx + "-aadhaar")
-            ?.value?.trim();
-          if (name || aadhaar)
+        document.querySelectorAll(".member-item").forEach(function (block) {
+          const idx = block.id.replace("member-block-", "");
+          const name =
+            (document.getElementById("member-" + idx + "-name") || {}).value ||
+            "";
+          const aadhaar =
+            (document.getElementById("member-" + idx + "-aadhaar") || {})
+              .value || "";
+          if (name.trim() || aadhaar.trim())
             members.push({
-              name: name || "",
-              aadhaarNo: aadhaar?.replace(/\s/g, "") || "",
+              name: name.trim(),
+              aadhaarNo: aadhaar.replace(/\s/g, ""),
             });
         });
         return members;
@@ -1444,7 +1323,7 @@
       // ── Payment ───────────────────────────────────────────────────────────────────
       function selectPayment(type) {
         currentPayment = type;
-        ["cash", "online", "half"].forEach((t) => {
+        ["cash", "online", "half"].forEach(function (t) {
           document.getElementById("chip-" + t).className = "payment-chip";
           document.getElementById("fields-" + t).classList.remove("show");
         });
@@ -1455,26 +1334,25 @@
       }
 
       function updateTotal() {
-        let total = 0;
+        var total = 0;
         if (currentPayment === "cash")
           total = parseFloat(document.getElementById("cash-amount").value) || 0;
         if (currentPayment === "online")
           total =
             parseFloat(document.getElementById("online-amount").value) || 0;
-        if (currentPayment === "half") {
+        if (currentPayment === "half")
           total =
             (parseFloat(document.getElementById("cash-amount-half").value) ||
               0) +
             (parseFloat(document.getElementById("online-amount-half").value) ||
               0);
-        }
         document.getElementById("total-display").textContent =
           "₹ " + total.toLocaleString("en-IN");
       }
 
       function collectPayment() {
         if (!currentPayment) return null;
-        const p = {
+        var p = {
           type: currentPayment,
           cashAmount: 0,
           onlineAmount: 0,
@@ -1483,11 +1361,13 @@
         if (currentPayment === "cash") {
           p.cashAmount =
             parseFloat(document.getElementById("cash-amount").value) || 0;
-        } else if (currentPayment === "online") {
+        }
+        if (currentPayment === "online") {
           p.onlineAmount =
             parseFloat(document.getElementById("online-amount").value) || 0;
           p.upiRef = document.getElementById("upi-ref").value.trim();
-        } else if (currentPayment === "half") {
+        }
+        if (currentPayment === "half") {
           p.cashAmount =
             parseFloat(document.getElementById("cash-amount-half").value) || 0;
           p.onlineAmount =
@@ -1498,35 +1378,37 @@
         return p;
       }
 
-      // ── Submit ────────────────────────────────────────────────────────────────────
+      // ── Submit ─────────────────────────────────────────────────────────────────────
       async function submitCheckin() {
-        const roomNo = document.getElementById("room-no").value.trim();
-        const guestName = document.getElementById("guest-name").value.trim();
-        const aadhaar = document.getElementById("guest-aadhaar").value.trim();
+        var roomNo = document.getElementById("room-no").value.trim();
+        var guestName = document.getElementById("guest-name").value.trim();
+        var aadhaar = document.getElementById("guest-aadhaar").value.trim();
 
         if (!roomNo) {
-          showToast("⚠️ Room number is required", "error");
+          showToast("Room number is required", "error");
           return;
         }
         if (!guestName) {
-          showToast("⚠️ Guest name is required", "error");
+          showToast("Guest name is required", "error");
           return;
         }
         if (!aadhaar) {
-          showToast("⚠️ Guest Aadhaar number is required", "error");
+          showToast("Guest Aadhaar number is required", "error");
           return;
         }
         if (!currentPayment) {
-          showToast("⚠️ Select a payment type", "error");
+          showToast("Select a payment type", "error");
           return;
         }
 
-        const btn = document.getElementById("submit-btn");
+        var btn = document.getElementById("submit-btn");
         btn.disabled = true;
-        btn.textContent = "⏳ Saving...";
+        btn.textContent = "Saving...";
 
-        const payload = {
-          roomNo,
+        // FIX: collect payment BEFORE resetForm wipes state
+        var pmt = collectPayment();
+        var payload = {
+          roomNo: roomNo,
           guest: {
             name: guestName,
             aadhaarNo: aadhaar.replace(/\s/g, ""),
@@ -1535,39 +1417,39 @@
             address: document.getElementById("guest-address").value.trim(),
           },
           members: collectMembers(),
-          payment: collectPayment(),
+          payment: pmt,
           remarks: document.getElementById("remarks").value.trim(),
         };
 
         try {
-          const res = await fetch(API_BASE + "/api/checkin", {
+          var res = await fetch(API_BASE + "/api/checkin", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(payload),
           });
-          const data = await res.json();
+          var data = await res.json();
           if (data.success) {
-            showToast("✅ Check-in saved! Sr. No. " + data.srNo, "success");
-            resetForm();
-            // Save to local recent
             recentCheckins.unshift({
               name: guestName,
               room: roomNo,
               payment: currentPayment,
-              total: collectPayment()
-                ? collectPayment().cashAmount + collectPayment().onlineAmount
-                : 0,
+              total: pmt ? pmt.cashAmount + pmt.onlineAmount : 0,
               time: new Date().toLocaleTimeString("en-IN", {
                 hour: "2-digit",
                 minute: "2-digit",
               }),
             });
-            switchPage("home");
+            resetForm();
+            showToast("Check-in saved! Sr. No. " + data.srNo, "success");
+            // FIX: delay so user sees the success toast before redirect
+            setTimeout(function () {
+              switchPage("home");
+            }, 1500);
           } else {
-            showToast("❌ " + (data.error || "Save failed"), "error");
+            showToast(data.error || "Save failed", "error");
           }
-        } catch {
-          showToast("❌ Cannot reach server. Check connection.", "error");
+        } catch (e) {
+          showToast("Cannot reach server. Check connection.", "error");
         } finally {
           btn.disabled = false;
           btn.textContent = "✅ Save Check-in to Sheet";
@@ -1582,8 +1464,8 @@
           "guest-dob",
           "guest-address",
           "remarks",
-        ].forEach((id) => {
-          const el = document.getElementById(id);
+        ].forEach(function (id) {
+          var el = document.getElementById(id);
           if (el) el.value = "";
         });
         document.getElementById("guest-gender").value = "";
@@ -1591,7 +1473,7 @@
         document.getElementById("no-members-msg").style.display = "";
         memberCount = 0;
         currentPayment = null;
-        ["cash", "online", "half"].forEach((t) => {
+        ["cash", "online", "half"].forEach(function (t) {
           document.getElementById("chip-" + t).className = "payment-chip";
           document.getElementById("fields-" + t).classList.remove("show");
         });
@@ -1602,186 +1484,203 @@
           "cash-amount-half",
           "online-amount-half",
           "upi-ref-half",
-        ].forEach((id) => {
-          const el = document.getElementById(id);
+        ].forEach(function (id) {
+          var el = document.getElementById(id);
           if (el) el.value = "";
         });
         document.getElementById("total-display").textContent = "₹ 0";
       }
 
-      // ── Home Stats ────────────────────────────────────────────────────────────────
-      async function loadHomeStats() {
-        setHomeDate();
-        renderRecent();
-        try {
-          const now = new Date();
-          const month = now.toLocaleString("en-IN", {
-            month: "long",
-            year: "numeric",
-          });
-          const res = await fetch(
-            API_BASE + "/api/records?month=" + encodeURIComponent(month),
-          );
-          const data = await res.json();
-          if (data.success && data.data?.length > 1) {
-            const records = data.data.slice(1); // skip header
-            document.getElementById("stat-month").textContent = records.length;
-            const today = now.toLocaleDateString("en-IN");
-            const todayCount = records.filter((r) => r[1] === today).length;
-            document.getElementById("stat-today").textContent = todayCount;
-          }
-        } catch {
-          /* offline or no records yet */
-        }
-      }
-
-      function renderRecent() {
-        const el = document.getElementById("recent-list");
-        if (!recentCheckins.length) {
-          el.innerHTML = `<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No check-ins yet today</div><div class="empty-sub">Tap the button above to add one</div></div>`;
-          return;
-        }
-        el.innerHTML = recentCheckins
-          .slice(0, 5)
-          .map(
-            (c) => `
-    <div class="recent-card">
-      <div class="recent-avatar">${c.name[0].toUpperCase()}</div>
-      <div>
-        <div class="recent-name">${c.name}</div>
-        <div class="recent-meta">Room ${c.room} · ${c.time}</div>
-      </div>
-      <div class="recent-badge badge-${c.payment}">
-        ${c.payment === "half" ? "½+½" : c.payment}
-      </div>
-    </div>
-  `,
-          )
-          .join("");
-      }
-
       // ── Records ───────────────────────────────────────────────────────────────────
       async function loadMonths() {
         try {
-          const res = await fetch(API_BASE + "/api/months");
-          const data = await res.json();
-          const sel = document.getElementById("month-select");
-          if (data.success && data.months?.length) {
+          var res = await fetch(API_BASE + "/api/months");
+          var data = await res.json();
+          var sel = document.getElementById("month-select");
+          if (data.success && data.months && data.months.length) {
             sel.innerHTML = data.months
-              .map((m) => `<option value="${m}">${m}</option>`)
+              .map(function (m) {
+                return '<option value="' + m + '">' + m + "</option>";
+              })
               .join("");
             loadRecords();
           } else {
             sel.innerHTML = "<option>No data yet</option>";
           }
-        } catch {
+        } catch (e) {
           document.getElementById("month-select").innerHTML =
             "<option>Server offline</option>";
         }
       }
 
       async function loadRecords() {
-        const month = document.getElementById("month-select").value;
-        if (!month || month === "No data yet" || month === "Server offline")
+        var month = document.getElementById("month-select").value;
+        if (
+          !month ||
+          month === "No data yet" ||
+          month === "Server offline" ||
+          month === "Loading..."
+        )
           return;
         try {
-          const res = await fetch(
+          var res = await fetch(
             API_BASE + "/api/records?month=" + encodeURIComponent(month),
           );
-          const data = await res.json();
+          var data = await res.json();
           if (data.success) {
             allRecords = data.data || [];
-            renderRecords(allRecords.slice(1)); // skip header row
+            renderRecords(allRecords.slice(1));
           }
-        } catch {
+        } catch (e) {
           showToast("Could not load records", "error");
         }
       }
 
       function renderRecords(rows) {
-        const el = document.getElementById("records-list");
-        if (!rows.length) {
-          el.innerHTML = `<div class="empty-state"><div class="empty-icon">📂</div><div class="empty-text">No records this month</div></div>`;
+        var el = document.getElementById("records-list");
+        if (!rows || !rows.length) {
+          el.innerHTML =
+            '<div class="empty-state"><div class="empty-icon">📂</div><div class="empty-text">No records this month</div></div>';
           return;
         }
         el.innerHTML = rows
-          .map((r) => {
-            const [
-              srNo,
-              date,
-              time,
-              room,
-              name,
-              aadhaar,
-              dob,
-              gender,
-              address,
-              members,
-              ,
-              ,
-              ,
-              ,
-              ,
-              ,
-              ,
-              ,
-              payType,
-              cashAmt,
-              onlineAmt,
-              total,
-            ] = r;
-            const badgeCls =
+          .map(function (r) {
+            var payType = r[18] || "cash";
+            var total = r[21] || 0;
+            var badgeCls =
               payType === "cash"
                 ? "badge-cash"
                 : payType === "online"
                   ? "badge-online"
                   : "badge-half";
-            return `
-      <div class="record-card">
-        <div class="record-top">
-          <div>
-            <div class="record-name">${name || "—"}</div>
-            <div class="record-room">Room ${room} · ${date} ${time}</div>
-          </div>
-          <div class="record-amount">₹${parseFloat(total || 0).toLocaleString("en-IN")}</div>
-        </div>
-        <div class="record-details">
-          <span class="record-tag">👥 ${members || 1} member(s)</span>
-          <span class="record-tag recent-badge ${badgeCls}">${payType}</span>
-          ${aadhaar ? `<span class="record-tag">🪪 ${aadhaar}</span>` : ""}
-        </div>
-      </div>
-    `;
+            return (
+              '<div class="record-card">' +
+              '<div class="record-top">' +
+              '<div><div class="record-name">' +
+              (r[4] || "—") +
+              "</div>" +
+              '<div class="record-room">Room ' +
+              (r[3] || "?") +
+              " · " +
+              (r[1] || "") +
+              " " +
+              (r[2] || "") +
+              "</div></div>" +
+              '<div class="record-amount">₹' +
+              parseFloat(total).toLocaleString("en-IN") +
+              "</div>" +
+              "</div>" +
+              '<div class="record-details">' +
+              '<span class="record-tag">👥 ' +
+              (r[9] || 1) +
+              " member(s)</span>" +
+              '<span class="record-tag recent-badge ' +
+              badgeCls +
+              '">' +
+              payType +
+              "</span>" +
+              (r[5] ? '<span class="record-tag">🪪 ' + r[5] + "</span>" : "") +
+              "</div></div>"
+            );
           })
           .join("");
       }
 
-      // ── CSV Download ──────────────────────────────────────────────────────────────
       function downloadCSV() {
         if (!allRecords.length) {
           showToast("No records to download", "error");
           return;
         }
-        const month = document.getElementById("month-select").value;
-        const csv = allRecords
-          .map((row) =>
-            row
-              .map((cell) => '"' + String(cell || "").replace(/"/g, '""') + '"')
-              .join(","),
-          )
+        var month = document.getElementById("month-select").value;
+        var csv = allRecords
+          .map(function (row) {
+            return row
+              .map(function (cell) {
+                return '"' + String(cell || "").replace(/"/g, '""') + '"';
+              })
+              .join(",");
+          })
           .join("\n");
-        const blob = new Blob(["\uFEFF" + csv], {
+        var blob = new Blob(["\uFEFF" + csv], {
           type: "text/csv;charset=utf-8;",
         });
-        const a = document.createElement("a");
+        var a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
-        a.download = "Lodge_Records_" + month.replace(/ /g, "_") + ".csv";
+        a.download = "Lodge_" + month.replace(/ /g, "_") + ".csv";
+        document.body.appendChild(a);
         a.click();
-        showToast("⬇️ Download started!", "success");
+        document.body.removeChild(a);
+        showToast("Download started!", "success");
       }
 
-      // ── Init ─────────────────────────────────────────────────────────────────────
-      setHomeDate();
+      // ── Home stats ─────────────────────────────────────────────────────────────────
+      async function loadHomeStats() {
+        document.getElementById("home-date").textContent =
+          new Date().toLocaleDateString("en-IN", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          });
+        renderRecent();
+        try {
+          var month = new Date().toLocaleString("en-IN", {
+            month: "long",
+            year: "numeric",
+          });
+          var res = await fetch(
+            API_BASE + "/api/records?month=" + encodeURIComponent(month),
+          );
+          var data = await res.json();
+          if (data.success && data.data && data.data.length > 1) {
+            var records = data.data.slice(1);
+            document.getElementById("stat-month").textContent = records.length;
+            var today = new Date().toLocaleDateString("en-IN");
+            document.getElementById("stat-today").textContent = records.filter(
+              function (r) {
+                return r[1] === today;
+              },
+            ).length;
+          }
+        } catch (e) {}
+      }
+
+      function renderRecent() {
+        var el = document.getElementById("recent-list");
+        if (!recentCheckins.length) {
+          el.innerHTML =
+            '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No check-ins yet today</div><div class="empty-sub">Tap the button above to add one</div></div>';
+          return;
+        }
+        el.innerHTML = recentCheckins
+          .slice(0, 5)
+          .map(function (c) {
+            return (
+              '<div class="recent-card">' +
+              '<div class="recent-avatar">' +
+              c.name[0].toUpperCase() +
+              "</div>" +
+              '<div><div class="recent-name">' +
+              c.name +
+              '</div><div class="recent-meta">Room ' +
+              c.room +
+              " · " +
+              c.time +
+              "</div></div>" +
+              '<div class="recent-badge badge-' +
+              c.payment +
+              '">' +
+              (c.payment === "half" ? "½+½" : c.payment) +
+              "</div>" +
+              "</div>"
+            );
+          })
+          .join("");
+      }
+
+      // ── Init ──────────────────────────────────────────────────────────────────────
+      // FIX: set up guest OCR listener properly via addEventListener
+      setupOCRInput("ocr-file-guest", "guest");
       loadHomeStats();
     </script>
   </body>
